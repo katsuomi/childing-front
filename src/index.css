@@ -3,13 +3,142 @@
 body {
   margin: 0px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
+  min-width: 1490px;
 }
 
 .top-back {
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   background-image: url(./images/orange_back.jpg);
   background-size: cover;
   background-position: center;
 }
 
+.marginTop100px {
+  margin-top: 100px;
+}
+
+.marginTop116px {
+  margin-top: 116px;
+}
+
+.marginTop160px {
+  margin-top: 160px;
+}
+
+.leftSideBackGroundStyle {
+  background-color: white;
+  height: 410px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.topCenterElementBackStyle {
+  background-color: white;
+  width: 196px;
+  height: 196px;
+  border-radius: 10px;
+  float: left;
+  margin: 15px;
+}
+
+.paddingLeft60px {
+  padding-left: 60px;
+}
+
+.topCenterChildImageStyle {
+  margin-top: 10px;
+  width: 120px;
+  height: 120px;
+  border: 10px solid #28D9F0;
+  border-radius: 50%;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.boldMore {
+  font-weight: 900;
+}
+
+.topCenterSideChildNameStyle { 
+  margin-top: 0px;
+}
+
+.topCenterSideChildNameStyle2 { 
+  margin-top: -20px;
+  font-size: 10px;
+}
+
+.text-light {
+  font-weight: lighter;
+}
+
+.topAbsenceStyle {
+  background-color: black;
+  color: white;
+  padding: 5px 25px;
+  border-radius: 25px;
+}
+
+.fs20px {
+  font-size: 20px;
+}
+
+.fs35px {
+  font-size:35px;
+}
+
+.topRightAbsenceBorderBottom {
+  border-bottom: 1px solid black;
+}
+
+.marginTop50px {
+  margin-top: 50px;
+}
+
+.topLeftSideHeadLetter{
+  position: relative;
+  display: inline-block;
+  padding: 0 35px;
+  font-size: 20px;
+}
+
+h1:before, h1:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  width: 25px;
+  height: 2px;
+  background-color: black;
+}
+
+h1:before {
+  left:0;
+}
+h1:after {
+  right: 0;
+}
+
+.topLeftSideWeatherImageStyle{
+  width: 100px;
+  margin-top: -20px;
+}
+
+.marginTopminus10px{
+  margin-top: -10px;
+}
+
+.topLeftSideNowTimeStyle{
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  font-size: 40px;
+  padding: 5px 41px;
+}
