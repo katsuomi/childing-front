@@ -1,17 +1,27 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
+import {Link} from "react-router-dom"
+const children = require('../materials/material.js');
 
 const TopCenterSideComponent = () => {
   return (
     <React.Fragment>   
-      <Grid container className="marginTop100px paddingLeft60px">
+      <Grid container className="marginTop14px paddingLeft60px">
         <Grid item xs={12} >
-          {[0,1,2,3,4,5,6,7,8].map((i) =>(
-            <div key={i} className="topCenterElementBackStyle center">
-              <img src={`${process.env.PUBLIC_URL}/images/onnna.jpg`} alt="onnna" className="topCenterChildImageStyle"  />
-              <p className="bold topCenterSideChildNameStyle">青木克臣</p>
-              <p className="text-light topCenterSideChildNameStyle2">あおきかつおみ</p>
-            </div>
+          {children.children.map((child,i) =>(
+            <Link to={"children/"+child.id} key={i}>
+              <div className="topCenterElementBackStyle center">
+                {child.id === 5 ?
+                    <div className="topCenterChildImageBorderStyle">
+                      <img src={child.image_path} alt="onnna" className="topCenterChildImageStyle"  />
+                    </div>
+                  :
+                    <img src={child.image_path} alt="onnna" className="topCenterChildImageStyle2"  />
+                }
+                <p className="bold topCenterSideChildNameStyle">{child.name}</p>
+                <p className="text-light topCenterSideChildNameStyle2">{child.name_furigana}</p>
+              </div>
+            </Link>
           ))}
         </Grid>
       </Grid>

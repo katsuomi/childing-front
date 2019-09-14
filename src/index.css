@@ -2,7 +2,7 @@
 
 body {
   margin: 0px;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: 'M PLUS RoundinToped 1c', sans-serif;
   min-width: 1490px;
 }
 
@@ -12,6 +12,18 @@ body {
   background-image: url(./images/orange_back.jpg);
   background-size: cover;
   background-position: center;
+}
+
+.marginTop14px {
+  margin-top: 14px;
+}
+
+.marginTop30px {
+  margin-top: 30px;
+}
+
+.marginTop80px {
+  margin-top: 80px;
 }
 
 .marginTop100px {
@@ -26,9 +38,13 @@ body {
   margin-top: 160px;
 }
 
+.marginTop164px {
+  margin-top: 164px;
+}
+
 .leftSideBackGroundStyle {
   background-color: white;
-  height: 410px;
+  height: 421px;
   width: 200px;
   border-radius: 10px;
 }
@@ -47,11 +63,36 @@ body {
 }
 
 .topCenterChildImageStyle {
-  margin-top: 10px;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.topCenterChildImageStyle2 {
+  width: 100px;
+  height: 100px;
   border: 10px solid #28D9F0;
   border-radius: 50%;
+  margin-top: 20px;
+}
+
+.topCenterChildImageBorderStyle{
+  width: 120px;
+  height: 120px;
+  margin-top: 20px;
+  margin-left: 40px;
+  animation: bg-color 30s infinite;
+  border-radius: 50%;
+}
+
+@keyframes bg-color {
+  0% { background-color: #28D9F0; }
+  20% { background-color: #ffd78e; }
+  40% { background-color: #ff8800; }
+  60% { background-color: #ff5353; }
+  80% { background-color: #ff1919; }
+  100% { background-color: #ff1900; }
 }
 
 .center {
@@ -67,12 +108,14 @@ body {
 }
 
 .topCenterSideChildNameStyle { 
-  margin-top: 0px;
+  margin-top: 10px;
+  color: black;
 }
 
 .topCenterSideChildNameStyle2 { 
   margin-top: -20px;
   font-size: 10px;
+  color: black;
 }
 
 .text-light {
@@ -94,6 +137,14 @@ body {
   font-size:35px;
 }
 
+.fs40px {
+  font-size:40px;
+}
+
+.fs70px {
+  font-size:70px;
+}
+
 .topRightAbsenceBorderBottom {
   border-bottom: 1px solid black;
 }
@@ -102,7 +153,7 @@ body {
   margin-top: 50px;
 }
 
-.topLeftSideHeadLetter{
+.topLeftSideHeadLetter {
   position: relative;
   display: inline-block;
   padding: 0 35px;
@@ -126,19 +177,81 @@ h1:after {
   right: 0;
 }
 
-.topLeftSideWeatherImageStyle{
+.topLeftSideWeatherImageStyle {
   width: 100px;
   margin-top: -20px;
 }
 
-.marginTopminus10px{
+.marginTopminus10px {
   margin-top: -10px;
 }
 
-.topLeftSideNowTimeStyle{
+.topLeftSideNowTimeStyle {
   background-color: black;
   border-radius: 10px;
   color: white;
   font-size: 40px;
   padding: 5px 41px;
+}
+
+.headerLogoStyle {
+  margin-top: 10px;
+  width: 200px;
+}
+
+.marginTop110px {
+  margin-top: 110px;
+}
+
+.ChildrenShowRightSideBackGroundStyle {
+  background-color: white;
+  border-radius: 10px;
+  height: 646px;
+}
+
+.ChildrenShowPercentStyle {
+  border-radius: 50%;
+  border: 8px solid red;
+  height: 130px;
+  width: 143px;
+  padding-top: 14px;
+  padding-left: 4px;
+  text-align:center;
+  margin-left: 40px;
+  color: red;
+}
+
+.childrenShowChildNameStyle {
+  margin-top: -50px;
+}
+
+.childrenShowChildImageStyle {
+  height: 143px;
+  width: 143px;
+  border: 5px solid rgb(226, 226, 226);
+  border-radius: 50%;
+}
+
+.childrenShowKcalStyle {
+  font-size: 20px;
+  background-color: #83C044;
+  padding: 10px 0px;
+  width: 85%;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  margin-left: 40px;
+  margin-top: 60px;
+}
+
+.childrenShowBpmStyle {
+  font-size: 20px;
+  background-color: red;
+  padding: 10px 0px;
+  width: 85%;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  margin-left: 40px;
+  margin-top: 60px;
 }

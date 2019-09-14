@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import './index.css';
 import reducer from './reducers'
 import App from "./presentationalComponents/App";
+import ChildrenShowComponent from "./presentationalComponents/ChildrenShowComponent";
 import {BrowserRouter,Route,Switch} from "react-router-dom";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension"
@@ -16,6 +17,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} /> 
+        <Route exact path="/children/:id" component={ChildrenShowComponent} /> 
       </Switch>
     </BrowserRouter>
   </Provider>, 
