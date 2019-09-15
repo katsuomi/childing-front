@@ -1,103 +1,156 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts'
 
-function zeroPadding(num) {
-  let str = String(num)
-  if (str.length == 1) {
-    return "0" + str
-  } else {
-    return str
-  }
-}
+// perlin noise
+var i = 0
+var MAX_VERTICES = 256;
+var r = [];
 
-var config = {
-  title: {
-    text: ''
-  },
-  chart: {
-    type: 'area',
-    events: {
-      load: function () {
-        // set up the updating of the chart each second
-        var series = this.series[0];
-        setInterval(function () {
-          var y = Math.random() * 50 + 60;
-          series.addPoint([y], true, true);
-        }, 1000);
-      }
-    }
-  },
-  xAxis: {
-    allowDecimals: false,
-    labels: {
-      formatter: function () {
-        let date = new Date(this.value * 1000)
-        let hour = zeroPadding(date.getHours())
-        let min = zeroPadding(date.getMinutes())
-        let sec = zeroPadding(date.getSeconds())
-        return `${hour}:${min}:${sec}`;
-      }
-    },
-    title: {
-      text: ''
-    }
-  },
-  yAxis: {
-    labels: {
-      formatter: function () {
-        return this.value;
-      }
-    },
-    title: {
-      text: ''
-    }
-  },
-  plotOptions: {
-    area: {
-      pointStart: 1568509200,
-      marker: {
-        enabled: false,
-        symbol: 'circle',
-        radius: 1,
-        states: {
-          hover: {
-            enabled: true
-          }
-        }
-      }
-    }
-  },
-  series: [{
-  showInLegend: false,
-  data: [69.86879919108293,
-    94.5460044491916,
-    65.66292326382481,
-    61.48737216367374,
-    80.77594088422046,
-    67.86750180875403,
-    109.35742465540609,
-    86.62061038786209,
-    103.56012095115037,
-    94.06147605608754,
-    84.09214000756894,
-    82.11623884470133,
-    82.15804102176955,
-    95.7317220514775,
-    68.2347926747922,
-    96.38753456963889,
-    107.91131402910382,
-    80.52964989058361,
-    90.19141352719254,
-    68.10835345581962]
-  }]
+const getVal = () => {
+    let x = i / 3
+    i++;
+
+    var scaledX = x;
+    var xFloor = Math.floor(scaledX);
+    var t = scaledX - xFloor;
+    var tRemapSmoothstep = t * t * (3 - 2 * t);
+
+    var xMin = xFloor;
+    var xMax = (xMin + 1);
+
+    var y = lerp(r[xMin], r[xMax], tRemapSmoothstep);
+
+    return y;
 };
 
-const GraphComponent = () => {
-  return (
-    <div className="marginTop30px">
-      <ReactHighcharts config={config}></ReactHighcharts>
-    </div>
-  );
+var lerp = (a, b, t) => {
+    return a * (1 - t) + b * t;
+};
+
+// zero padding
+const zeroPadding = (num) => {
+    let str = String(num)
+    if (str.length == 1) {
+        return "0" + str
+    } else {
+        return str
+    }
+}
+
+const config = (isOverlay, randomFunc) => {
+    const transparent = 'rgba(0,0,0,0)'
+    const randomValue = (weight, bias) => {
+        return randomFunc() * weight + bias;
+    }
+    const randomValues = (weight, bias, n) => {
+        var res = []
+        for (var i = 0; i < n; i++) {
+            res.push(randomValue(weight, bias))
+        }
+        return res
+    }
+
+    return {
+        title: {
+            text: ''
+        },
+        chart: {
+            type: isOverlay ? 'line' : 'area',
+            events: {
+                load: function () {
+                    var series = this.series[0];
+                    setInterval(function () {
+
+                        series.addPoint([randomValue(50, 60)], true, true);
+                    }, 1000);
+                }
+            },
+            backgroundColor: transparent
+        },
+        xAxis: {
+            allowDecimals: false,
+            labels: {
+                formatter: function () {
+                    let date = new Date(this.value * 1000)
+                    let hour = zeroPadding(date.getHours())
+                    let min = zeroPadding(date.getMinutes())
+                    let sec = zeroPadding(date.getSeconds())
+                    return `${hour}:${min}:${sec}`;
+                },
+                style: {
+                    color: isOverlay ? '#666666' : transparent
+                }
+            },
+            title: {
+                text: ''
+            },
+            tickColor: isOverlay ? 'rgb(204, 214, 235)' : transparent
+        },
+        yAxis: [
+            {
+                labels: {
+                    formatter: function () {
+                        return '';
+                    },
+                },
+                title: {
+                    text: ''
+                },
+                opposite: isOverlay,
+                min: 50, max: 140
+            },
+            {
+                labels: {
+                    formatter: function () {
+                        return '';
+                    },
+                },
+                title: {
+                    text: ''
+                },
+                opposite: !isOverlay,
+                min: 50, max: 140
+            },
+        ],
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, '#52de97'],
+                        [1, '#f4f4f4']
+                    ]
+                },
+                pointStart: 1568509200,
+            },
+        },
+
+        series: [{
+            showInLegend: false,
+            color: isOverlay ? 'red' : 'green',
+            data: randomValues(50, 60, 20)
+        },
+        ]
+    };
+}
+
+for (var i = 0; i < MAX_VERTICES; ++i) {
+    r.push(Math.random());
+}
+
+class GraphComponent extends Component {
+    render() {
+        return (
+            <div>
+                <div style={{ position: "absolute" }}>
+                    <ReactHighcharts config={config(false, getVal)}></ReactHighcharts>
+                </div>
+                <div style={{ position: "absolute" }}>
+                    <ReactHighcharts config={config(true, Math.random)}></ReactHighcharts>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default GraphComponent;
