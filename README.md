@@ -1,5 +1,3 @@
 This repository is using Hackathon by Aichi Pref Universities,and Awarded excellence!
 
-<div style="text-align:center;">
-  <img width="300px" alt="スクリーンショット 2019-10-02 16 03 55" src="https://user-images.githubusercontent.com/36298285/66024246-4b887080-e52e-11e9-95bb-0ebb6ea46a13.png" title="タイトル" />
-</div>
+<img src="https://user-images.githubusercontent.com/36298285/66024246-4b887080-e52e-11e9-95bb-0ebb6ea46a13.png" width="300px" alt="childing" />
