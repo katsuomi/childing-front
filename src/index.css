@@ -58,6 +58,15 @@ body {
   margin: 15px;
 }
 
+.topCenterElementBackStyle2 {
+  animation: bg-color2 30s infinite;
+  width: 196px;
+  height: 196px;
+  border-radius: 10px;
+  float: left;
+  margin: 15px;
+}
+
 .paddingLeft60px {
   padding-left: 60px;
 }
@@ -67,6 +76,7 @@ body {
   height: 100px;
   padding: 10px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .topCenterChildImageStyle2 {
@@ -75,6 +85,7 @@ body {
   border: 10px solid #28D9F0;
   border-radius: 50%;
   margin-top: 20px;
+  object-fit: cover;
 }
 
 .topCenterChildImageBorderStyle{
@@ -84,6 +95,7 @@ body {
   margin-left: 40px;
   animation: bg-color 30s infinite;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 @keyframes bg-color {
@@ -91,6 +103,15 @@ body {
   20% { background-color: #ffd78e; }
   40% { background-color: #ff8800; }
   60% { background-color: #ff5353; }
+  80% { background-color: #ff1919; }
+  100% { background-color: #ff1900; }
+}
+
+@keyframes bg-color2 {
+  0% { background-color: white; }
+  39% { background-color: white; }
+  40% { background-color: yellow; }
+  79% { background-color: yellow; }
   80% { background-color: #ff1919; }
   100% { background-color: #ff1900; }
 }
@@ -180,6 +201,7 @@ h1:after {
 .topLeftSideWeatherImageStyle {
   width: 100px;
   margin-top: -20px;
+  object-fit: cover;
 }
 
 .marginTopminus10px {
@@ -221,8 +243,25 @@ h1:after {
   color: red;
 }
 
+.ChildrenShowPercentStyle2 {
+  border-radius: 50%;
+  animation: bg-color 30s infinite;
+  height: 130px;
+  width: 143px;
+  padding-top: 24px;
+  padding-left: 4px;
+  text-align:center;
+  margin-left: 40px;
+  color: #28D9F0;
+}
+
 .childrenShowChildNameStyle {
   margin-top: -50px;
+}
+
+.childrenShowChildNameStyle2 {
+  margin-top: -26px;
+  font-weight: 100;
 }
 
 .childrenShowChildImageStyle {
@@ -230,6 +269,7 @@ h1:after {
   width: 143px;
   border: 5px solid rgb(226, 226, 226);
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .childrenShowKcalStyle {

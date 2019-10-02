@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import ReactHighcharts from 'react-highcharts'
+import { connect } from 'react-redux'
+import {kcalFunc,bpmFunc} from "../actions"
 
 // perlin noise
-var i = 0
+var j = 0
 var MAX_VERTICES = 256;
 var r = [];
 
-const getVal = () => {
-    let x = i / 3
-    i++;
+const perlinNoise = (scale) => {
+    let scaledX = j / scale;
+    j++;
+    let xFloor = Math.floor(scaledX);
+    let t = scaledX - xFloor;
+    let tRemapSmoothstep = t * t * (3 - 2 * t);
 
-    var scaledX = x;
-    var xFloor = Math.floor(scaledX);
-    var t = scaledX - xFloor;
-    var tRemapSmoothstep = t * t * (3 - 2 * t);
+    let xMin = xFloor;
+    let xMax = (xMin + 1);
 
-    var xMin = xFloor;
-    var xMax = (xMin + 1);
-
-    var y = lerp(r[xMin], r[xMax], tRemapSmoothstep);
+    let y = lerp(r[xMin], r[xMax], tRemapSmoothstep);
 
     return y;
 };
@@ -37,15 +37,36 @@ const zeroPadding = (num) => {
     }
 }
 
-const config = (isOverlay, randomFunc) => {
+const config = (isOverlay, randomFunc, onChange) => {
     const transparent = 'rgba(0,0,0,0)'
     const randomValue = (weight, bias) => {
         return randomFunc() * weight + bias;
     }
-    const randomValues = (weight, bias, n) => {
+    const dynamicGraph1 = () => {
+        return 110 + perlinNoise(5) * 20 + Math.random() * 5
+    }
+    const dynamicGraph2 = () => {
+        return 60 + perlinNoise(5) * 20 + Math.random() * 5
+    }
+    const initGraph1 = () => {
+        let weight = 50
+        let bias = 60
+        let n = 20
         var res = []
         for (var i = 0; i < n; i++) {
-            res.push(randomValue(weight, bias))
+            let v = 3 * i + 50 + perlinNoise(5) * 20 + Math.random() * 5
+            res.push(v)
+        }
+        return res
+    }
+    const initGraph2 = () => {
+        let weight = 50
+        let bias = 60
+        let n = 20
+        var res = []
+        for (var i = 0; i < n; i++) {
+            let v = 60 + perlinNoise(5) * 20 + Math.random() * 5
+            res.push(v)
         }
         return res
     }
@@ -60,8 +81,11 @@ const config = (isOverlay, randomFunc) => {
                 load: function () {
                     var series = this.series[0];
                     setInterval(function () {
-
-                        series.addPoint([randomValue(50, 60)], true, true);
+                        let newValue = isOverlay ? dynamicGraph1() : dynamicGraph2()
+                        if (onChange) {
+                            onChange(newValue)
+                        }
+                        series.addPoint([newValue], true, true);
                     }, 1000);
                 }
             },
@@ -78,7 +102,7 @@ const config = (isOverlay, randomFunc) => {
                     return `${hour}:${min}:${sec}`;
                 },
                 style: {
-                    color: isOverlay ? '#666666' : transparent
+                    color: !isOverlay ? '#666666' : transparent
                 }
             },
             title: {
@@ -128,7 +152,7 @@ const config = (isOverlay, randomFunc) => {
         series: [{
             showInLegend: false,
             color: isOverlay ? 'red' : 'green',
-            data: randomValues(50, 60, 20)
+            data: isOverlay ? initGraph1() : initGraph2()
         },
         ]
     };
@@ -139,18 +163,29 @@ for (var i = 0; i < MAX_VERTICES; ++i) {
 }
 
 class GraphComponent extends Component {
+
     render() {
+        let activeEnergyRandom = () => {
+            return perlinNoise(5) * 0.3
+        }
+        let heartrateRandom = () => {
+            return perlinNoise(10) * 0.3 + i / 10000;
+        }
         return (
             <div>
                 <div style={{ position: "absolute" }}>
-                    <ReactHighcharts config={config(false, getVal)}></ReactHighcharts>
+                    <ReactHighcharts config={config(false, activeEnergyRandom, (x) => {
+                        // this.props.onActiveEnergyChange(x * 12 / 5 - 124)
+                        this.props.kcalFunc(x * 12 / 5 - 124)
+                    })}></ReactHighcharts>
                 </div>
                 <div style={{ position: "absolute" }}>
-                    <ReactHighcharts config={config(true, Math.random)}></ReactHighcharts>
+                    <ReactHighcharts config={config(true, heartrateRandom, this.props.bpmFunc)}></ReactHighcharts>
                 </div>
             </div>
         );
     }
 }
 
-export default GraphComponent;
+const mapDispatchToProps = ({kcalFunc,bpmFunc})
+export default connect(null, mapDispatchToProps)(GraphComponent)
