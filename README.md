@@ -1,3 +1,3 @@
 This repository is using Hackathon by Aichi Pref Universities,and Awarded excellence!
 
-![favicon](https://user-images.githubusercontent.com/36298285/66024069-d6b53680-e52d-11e9-9dfd-29c7533cf14e.png)
+![childing](https://user-images.githubusercontent.com/36298285/66024144-06643e80-e52e-11e9-963c-ae5d24ad4f1d.png)
